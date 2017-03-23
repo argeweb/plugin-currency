@@ -17,7 +17,7 @@ class Currency(Controller):
         pagination_limit = 50
 
     class Scaffold:
-        display_in_list = ('title', 'short_name', 'unit_name', 'exchange_rate', 'is_enable', 'is_main')
+        display_in_list = ('title', 'short_name', 'unit_name', 'exchange_rate', 'is_enable')
         hidden_in_form = ('is_main')
 
     @route_menu(list_name=u'backend', text=u'幣值設定', sort=9934, group=u'系統設定')

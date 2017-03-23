@@ -22,7 +22,7 @@
         {%- for property in scaffolding.display_in_list -%}
             <td>
                 {%- if property.find("is_") >= 0 or property.find("can_") >= 0 %}
-                    {%- if property.find("is_main") >= 0 %}
+                    {%- if item['name'].find("main") >= 0 %}
                         {% if item[property] %}是{% endif %}
                     {% else -%}
                         {{ s.scaffold_field_boolean(item, property) }}
