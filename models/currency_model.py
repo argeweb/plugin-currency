@@ -23,7 +23,7 @@ def get_current_currency_exchange_rate(*args, **kwargs):
 
 
 class CurrencyModel(BasicModel):
-    name = Fields.StringProperty(verbose_name=u'系統編號)')
+    name = Fields.StringProperty(verbose_name=u'識別名稱')
     title = Fields.StringProperty(verbose_name=u'幣值名稱')
     short_name = Fields.StringProperty(verbose_name=u'簡短的名稱', default=u'')
     unit_name = Fields.StringProperty(verbose_name=u'單位名稱', default=u'元')
