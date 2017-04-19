@@ -10,6 +10,21 @@ from argeweb import BasicModel
 from argeweb import Fields
 
 
+def exchange(exchange_rate, target, places=2):
+    if exchange_rate == 0:
+        target = 0.0
+    if target == u'':
+        target = 0.0
+    n = 10.0 ** places
+    try:
+        f_target = float(target)
+        if f_target == 0:
+            return 0
+        target = f_target / float(exchange_rate)
+    except:
+        target = 0.0
+    return int(target * n) / n * 1.0
+
 def get_current_currency_exchange_rate(*args, **kwargs):
     controller = kwargs['controller']
     use_currency_name = ''
@@ -67,16 +82,5 @@ class CurrencyModel(BasicModel):
         return cls.get_current_or_main_currency(use_currency_name)
 
     def calc(self, target, places=2):
-        if self.exchange_rate == 0:
-            target = 0.0
-        if target == u'':
-            target = 0.0
-        n = 10.0 ** places
-        try:
-            f_target = float(target)
-            if f_target == 0:
-                return 0
-            target = f_target / float(self.exchange_rate)
-        except:
-            target = 0.0
-        return int(target * n) / n * 1.0
+        return exchange(self.exchange_rate, target, places)
+
