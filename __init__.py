@@ -9,6 +9,7 @@
 from argeweb import ViewDatastore, ViewFunction
 from models.currency_model import CurrencyModel, get_current_currency_exchange_rate
 
+ViewDatastore.register('currency_list', CurrencyModel.all_enable)
 ViewDatastore.register('currency', CurrencyModel.find_by_name)
 ViewFunction.register(get_current_currency_exchange_rate)
 
