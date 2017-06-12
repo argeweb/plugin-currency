@@ -12,9 +12,6 @@ from argeweb.components.search import Search
 
 
 class Currency(Controller):
-    class Meta:
-        components = (scaffold.Scaffolding, Pagination, Search)
-
     class Scaffold:
         display_in_list = ('title', 'short_name', 'unit_name', 'exchange_rate', 'is_enable')
         hidden_in_form = ('is_main')
