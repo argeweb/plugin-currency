@@ -25,6 +25,7 @@ def exchange(exchange_rate, target, places=2):
         target = 0.0
     return int(target * n) / n * 1.0
 
+
 def get_current_currency_exchange_rate(*args, **kwargs):
     controller = kwargs['controller']
     use_currency_name = ''
@@ -43,8 +44,8 @@ class CurrencyModel(BasicModel):
     short_name = Fields.StringProperty(verbose_name=u'簡短的名稱', default=u'')
     unit_name = Fields.StringProperty(verbose_name=u'單位名稱', default=u'元')
     exchange_rate = Fields.FloatProperty(verbose_name=u'匯率', default=1.0)
-    is_enable = Fields.BooleanProperty(default=True, verbose_name=u'顯示於前台')
-    is_main = Fields.BooleanProperty(default=False, verbose_name=u'是否為基準貨幣')
+    is_enable = Fields.BooleanProperty(verbose_name=u'顯示於前台', default=True)
+    is_main = Fields.BooleanProperty(verbose_name=u'是否為基準貨幣', default=False)
 
     @classmethod
     def all_enable(cls, category=None, *args, **kwargs):
@@ -52,7 +53,7 @@ class CurrencyModel(BasicModel):
 
     @classmethod
     def get_or_create_main_currency(cls):
-        main = cls.find_by_name('main')
+        main = cls.get_by_name('main')
         if main is None:
             main = cls()
             main.name = 'main'
@@ -67,7 +68,7 @@ class CurrencyModel(BasicModel):
 
     @classmethod
     def get_current_or_main_currency(cls, currency_name):
-        current_currency = cls.find_by_name(currency_name)
+        current_currency = cls.get_by_name(currency_name)
         if current_currency is None:
             current_currency = CurrencyModel.get_or_create_main_currency()
         return current_currency

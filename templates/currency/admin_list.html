@@ -1,8 +1,8 @@
-{% extends "backend/list_layout.html" %}
+{% extends "backend/list.html" %}
 {# 權限 #}
 {% macro check_permission_url(action, item) -%}
     {% if action != "delete" or item.name != "main" %}
-    {% if uri_exists_with_permission(action=action, item=item) %}data-{{ action }}-url="{{ uri_action_link(action, item) }}"{% endif %}{% endif %}
+    {% if uri_permission(action=action, item=item) %}data-{{ action }}-url="{{ uri_action_link(action, item) }}"{% endif %}{% endif %}
 {%- endmacro %}
 
 {% block partial_tr_item %}
@@ -15,9 +15,9 @@
         {{ check_permission_url("delete", item) }}
         data-id="{{ print_key(item) }}">
         <td class="text-center sorting-mode move-headline">
-            {% if uri_exists_with_permission(action="sort_up", item=item) %}<a href="{{ uri_action_link('sort_up', item) }}" class="btn-json"><i class="icon icon-2x">keyboard_arrow_up</i></a>{% endif %}
+            {% if uri_permission(action="sort_up", item=item) %}<a href="{{ uri_action_link('sort_up', item) }}" class="btn-json"><i class="icon icon-2x">keyboard_arrow_up</i></a>{% endif %}
             <i class="icon icon-2x">view_headline</i>
-            {% if uri_exists_with_permission(action="sort_down", item=item) %}<a href="{{ uri_action_link('sort_down', item) }}" class="btn-json"><i class="icon icon-2x">keyboard_arrow_down</i></a>{% endif %}
+            {% if uri_permission(action="sort_down", item=item) %}<a href="{{ uri_action_link('sort_down', item) }}" class="btn-json"><i class="icon icon-2x">keyboard_arrow_down</i></a>{% endif %}
         </td>
         {%- for property in scaffolding.display_in_list -%}
             <td>

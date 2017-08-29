@@ -5,13 +5,10 @@
 # Author: Qi-Liang Wen (温啓良）
 # Web: http://www.yooliang.com/
 # Date: 2015/7/12.
-from datetime import datetime
-from argeweb import Controller, scaffold, route_menu, route_with, route, settings
-from argeweb import auth, add_authorizations
+from argeweb import Controller, scaffold, route_with, route
 from argeweb.components.pagination import Pagination
 from argeweb.components.csrf import CSRF, csrf_protect
 from argeweb.components.search import Search
-from plugins.mail import Mail
 from ..models.currency_model import CurrencyModel
 
 
@@ -30,7 +27,7 @@ class Data(Controller):
         use_currency_name = ''
         if 'use_currency' in self.session:
             use_currency_name = self.session['use_currency']
-        main_currency_record = self.meta.Model.find_by_name('main')
+        main_currency_record = self.meta.Model.get_by_name('main')
         main_currency = None
         current_currency = None
         for item in data:
